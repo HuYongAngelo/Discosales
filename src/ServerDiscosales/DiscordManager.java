@@ -29,4 +29,6 @@ public class DiscordManager {
         lista.get(nconto).addClient(s);
         return true;
     }
+    
+    
 }

@@ -11,20 +11,15 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class CommunicationManager implements Runnable {
-    private final ServerDiscord sd;
-    private Chat chat;
-    
+public class Chat {
     private Socket s;
     private OutputStream outClient;
     private InputStream inClient;
     private PrintWriter writer;
     private BufferedReader reader;
     
-    public CommunicationManager(Socket s, ServerDiscord sd) {
+    public Chat(Socket s) {
         this.s = s;
-        this.sd = sd;
-        chat = new Chat(s);
         
         try {
             outClient = s.getOutputStream();
@@ -36,22 +31,8 @@ public class CommunicationManager implements Runnable {
             Logger.getLogger(CommunicationManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    @Override
-    public void run() {
-        DiscordManager dm = new DiscordManager();
-        
-        try {
-            String cmd;
-            String command = reader.readLine();
-            String[] input = command.split(";");
-            cmd = input[0];
-            
-            if (cmd.equalsIgnoreCase("write")) {
-                chat.messaggi();
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(CommunicationManager.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    
+    public void messaggi(String message) {
+        writer.print(s.getLocalAddress()+message);
     }
 }
