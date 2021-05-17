@@ -13,13 +13,11 @@ public class Server {
             ServerSocket server;
         
             server = new ServerSocket(5500);
-        
-
+            
             while (true) {
                 Socket client = server.accept();
                 Thread Serverino = new Thread(new ServerManaging(client));
                 Serverino.start();
-
             }
         } catch (IOException ex) {
             Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);

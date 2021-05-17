@@ -14,15 +14,23 @@ public class ClientDiscosales {
     public static void main(String[] args) {
         Socket server;
         try {
+            String msg;
+            String[] risposta;
             server = new Socket("127.0.0.1", 5500);
 
             PrintWriter out = new PrintWriter(server.getOutputStream(), true);
             BufferedReader in = new BufferedReader(new InputStreamReader(server.getInputStream()));
             Scanner tastiera = new Scanner(System.in);
+            
             do {
-                out.write("write;"+tastiera.nextLine());
-                
-                System.out.println(in.readLine());
+                System.out.print("Messaggio: ");
+                msg = tastiera.nextLine();
+                out.println("write;"+msg);
+
+                risposta = in.readLine().split(";");
+                if (risposta[0].equalsIgnoreCase("read")) {
+                    System.out.println(risposta[1]);
+                }
             } while(true);
         } catch (IOException ex) {
             Logger.getLogger(ClientDiscosales.class.getName()).log(Level.SEVERE, null, ex);

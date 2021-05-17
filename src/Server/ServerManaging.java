@@ -20,19 +20,16 @@ public class ServerManaging implements Runnable {
     
     @Override
     public void run() {
-        System.out.println("Serverino  partito: "+ clientSocket.getInetAddress());
         try {
-            Thread t = new Thread(cm);
-            t.start();
+            System.out.println("Serverino  partito: "+ clientSocket.getInetAddress());
             
             PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
             BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            String richiesta = "";
             
+            String richiesta = in.readLine();
+            cm.Comunication(richiesta);
             
-                       
             out.close();
-            clientSocket.close();
         } catch (IOException ex) {
             Logger.getLogger(ServerManaging.class.getName()).log(Level.SEVERE, null, ex);
         }
