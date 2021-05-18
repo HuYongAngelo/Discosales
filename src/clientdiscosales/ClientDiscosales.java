@@ -14,6 +14,7 @@ public class ClientDiscosales {
     public static void main(String[] args) {
         Socket server;
         try {
+            String Username;
             String msg;
             String[] risposta;
             server = new Socket("127.0.0.1", 5500);
@@ -22,11 +23,16 @@ public class ClientDiscosales {
             BufferedReader in = new BufferedReader(new InputStreamReader(server.getInputStream()));
             Scanner tastiera = new Scanner(System.in);
             
+            System.out.print("Inserire Username: ");
+            Username = tastiera.nextLine();
+            
+            out.println("username;"+Username);
+            
             do {
                 System.out.print("Messaggio: ");
                 msg = tastiera.nextLine();
                 out.println("write;"+msg);
-
+                
                 risposta = in.readLine().split(";");
                 if (risposta[0].equalsIgnoreCase("read")) {
                     System.out.println(risposta[1]);
