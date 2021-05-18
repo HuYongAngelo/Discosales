@@ -14,7 +14,6 @@ public class ServerManaging implements Runnable {
     private Socket clientSocket;
     private ComunicationManager cm;
     public static HashMap <Socket, String> hm;
-    private Utente u;
     
     public ServerManaging(Socket clientSocket) {
         this.clientSocket = clientSocket;

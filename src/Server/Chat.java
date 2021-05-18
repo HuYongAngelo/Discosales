@@ -1,5 +1,6 @@
 package Server;
 
+import static Server.ServerManaging.hm;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -13,12 +14,10 @@ public class Chat {
     
     public Chat(Socket s) {
         this.s = s;
-        
-        
     }
     
     public String messaggi(String message) {
-        System.out.println(message);
-        return "read;"+s.getLocalAddress()+": "+message;
+        System.out.println(hm.get(s)+": "+message);
+        return "read;"+hm.get(s)+": "+message;
     }
 }

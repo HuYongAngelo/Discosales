@@ -32,7 +32,7 @@ public class ComunicationManager {
         String cmd;
         String[] input = richiesta.split(";");
         cmd = input[0];
-
+        
         if (cmd.equalsIgnoreCase("write")) {
             out.println(chat.messaggi(input[1]));
         }
