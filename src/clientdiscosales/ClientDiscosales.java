@@ -1,5 +1,6 @@
 package clientdiscosales;
 
+import static clientdiscosales.clientReader.risposta;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -16,28 +17,16 @@ public class ClientDiscosales {
         try {
             String Username;
             String msg;
-            String[] risposta;
+            String[] r;
+            
             server = new Socket("127.0.0.1", 5500);
-
-            PrintWriter out = new PrintWriter(server.getOutputStream(), true);
-            BufferedReader in = new BufferedReader(new InputStreamReader(server.getInputStream()));
-            Scanner tastiera = new Scanner(System.in);
+            clientReader cr = new clientReader(server);
+            clientWriter cw = new clientWriter(server);
+            Thread tcr = new Thread(cr);
+            Thread tcw = new Thread(cw);
             
-            System.out.print("Inserire Username: ");
-            Username = tastiera.nextLine();
-            
-            out.println("username;"+Username);
-            
-            do {
-                System.out.print("Messaggio: ");
-                msg = tastiera.nextLine();
-                out.println("write;"+msg);
-                
-                risposta = in.readLine().split(";");
-                if (risposta[0].equalsIgnoreCase("read")) {
-                    System.out.println(risposta[1]);
-                }
-            } while(true);
+            tcr.start();
+            tcw.start();
         } catch (IOException ex) {
             Logger.getLogger(ClientDiscosales.class.getName()).log(Level.SEVERE, null, ex);
         }

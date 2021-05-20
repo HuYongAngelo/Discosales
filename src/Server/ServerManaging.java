@@ -12,13 +12,19 @@ import java.util.logging.Logger;
 
 public class ServerManaging implements Runnable {
     private Socket clientSocket;
-    private ComunicationManager cm;
+    public static ComunicationManager cm;
     public static HashMap <Socket, String> hm;
+    
+    private serverReader sr;
+    private serverWriter sw;
     
     public ServerManaging(Socket clientSocket) {
         this.clientSocket = clientSocket;
         cm = new ComunicationManager(clientSocket);
         hm = new HashMap();
+        
+        sr = new serverReader(clientSocket);
+        sw = new serverWriter(clientSocket);
     }
     
     public void riempiLista(String[] user) {
@@ -27,20 +33,17 @@ public class ServerManaging implements Runnable {
     
     @Override
     public void run() {
+        Thread tsr = new Thread(sr);
+        Thread tsw = new Thread(sw);
+        
         try {
-            String richiesta;
             System.out.println("Serverino  partito: "+ clientSocket.getInetAddress());
             
-            PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
             BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             riempiLista(in.readLine().split(";"));
             
-            do {
-                richiesta = in.readLine();
-                cm.Comunication(richiesta);
-            } while(!richiesta.startsWith("exit"));
-            
-            out.close();
+            tsr.start();
+            tsw.start();
         } catch (IOException ex) {
             Logger.getLogger(ServerManaging.class.getName()).log(Level.SEVERE, null, ex);
         }
