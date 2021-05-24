@@ -15,7 +15,6 @@ public class ClientDiscosales {
     public static void main(String[] args) {
         Socket server;
         try {
-            String Username;
             String msg;
             String[] r;
             

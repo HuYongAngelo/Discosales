@@ -17,10 +17,13 @@ public class clientWriter implements Runnable {
     private PrintWriter out;
     private Scanner input;
     private boolean fermo = false;
+    private Login l;
     
     public clientWriter(Socket s) {
         this.s = s;
         input = new Scanner(System.in);
+        
+        l = new Login();
         try {
             out = new PrintWriter(s.getOutputStream(), true);
         } catch (IOException ex) {
@@ -31,9 +34,7 @@ public class clientWriter implements Runnable {
     @Override
     public void run() {
         String msg;
-        System.out.print("Username: ");
-        msg = "username;"+input.nextLine();
-        out.println(msg);
+        out.print(l.controllo());
         do {
             System.out.print("Write: ");
             msg = input.nextLine();
