@@ -33,6 +33,8 @@ public class clientReader implements Runnable {
                     stop();
                 } else if (a[0].equalsIgnoreCase("read")) {
                     System.out.println(a[1]);
+                } else if (a[0].equalsIgnoreCase("read")) {
+                    System.out.println(a[1]);
                 }
                 Thread.sleep(250);
             } while(!fermo);
