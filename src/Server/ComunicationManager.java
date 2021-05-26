@@ -29,11 +29,16 @@ public class ComunicationManager {
     }
     
     public void Comunication(String richiesta) {
-        String cmd;
         String[] input = richiesta.split(";");
-        cmd = input[0];
         
-        if (cmd.equalsIgnoreCase("write")) {
+        if (input[0].equalsIgnoreCase("read")) {
+            System.out.println(input[1]);
+        } else if (input[0].equalsIgnoreCase("login")) {
+            
+        } else if (input[0].equalsIgnoreCase("register")) {
+            
+        }
+        else if (input[0].equalsIgnoreCase("write")) {
             out.println(chat.messaggi(input[1]));
         }
     }
