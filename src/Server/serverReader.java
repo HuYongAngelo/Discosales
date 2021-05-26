@@ -31,12 +31,16 @@ public class serverReader implements Runnable {
             do {
                 risposta = in.readLine();
                 a = risposta.split(";");
-                if (a[0].equalsIgnoreCase("stop")) {
+                if (a[1].equalsIgnoreCase("stop")) {
                     stop();
                 } else if (a[0].equalsIgnoreCase("read")) {
                     System.out.println(a[1]);
+                } else if (a[0].equalsIgnoreCase("login")) {
+                    
+                } else if (a[0].equalsIgnoreCase("write")) {
+                    cm.Comunication(risposta);
                 }
-                cm.Comunication(risposta);
+                
                 Thread.sleep(250);
             } while(!fermo);
         } catch (IOException ex) {

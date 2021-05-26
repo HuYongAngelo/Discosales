@@ -15,7 +15,7 @@ public class Login {
         
         System.out.print("Username: ");
         username = sc.nextLine();
-        System.out.println("Password: ");
+        System.out.print("Password: ");
         password = sc.nextLine();
         
         credenziali = "login;"+username+";"+password;

@@ -18,6 +18,7 @@ public class clientWriter implements Runnable {
     private Scanner input;
     private boolean fermo = false;
     private Login l;
+    private String message;
     
     public clientWriter(Socket s) {
         this.s = s;
@@ -33,21 +34,26 @@ public class clientWriter implements Runnable {
 
     @Override
     public void run() {
-        String msg;
         out.print(l.controllo());
         do {
-            System.out.print("Write: ");
-            msg = input.nextLine();
-            out.println("write;"+msg);
-            if (msg.equalsIgnoreCase("stop")) {
+            writeMessage();
+            
+            out.println(message);
+            if (message.endsWith("stop")) {
                 stop();
             }
             try {
-                Thread.sleep(500);
+                Thread.sleep(250);
             } catch (InterruptedException ex) {
                 Logger.getLogger(clientWriter.class.getName()).log(Level.SEVERE, null, ex);
             }
         } while(!fermo);
+    }
+    
+    public void writeMessage() {
+        String message = input.nextLine();
+        
+        this.message = "write;"+message;
     }
     
     public void stop() {
