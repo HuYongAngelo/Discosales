@@ -27,17 +27,16 @@ public class serverWriter implements Runnable {
 
     @Override
     public void run() {
-        String msg;
-        System.out.print("Username: ");
-        msg = "username;"+input.nextLine();
-        out.println(msg);
         do {
-            System.out.print("Write: ");
+            
+            
+        /*  System.out.print("Write: ");
             msg = input.nextLine();
             out.println("write;"+msg);
             if (msg.equalsIgnoreCase("stop")) {
                 stop();
             }
+        */
             try {
                 Thread.sleep(500);
             } catch (InterruptedException ex) {

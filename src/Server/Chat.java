@@ -1,6 +1,6 @@
 package Server;
 
-import static Server.ServerManaging.hm;
+import static Server.Server.hm;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
