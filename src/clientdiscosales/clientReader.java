@@ -1,5 +1,6 @@
 package clientdiscosales;
 
+import static clientdiscosales.ClientDiscosales.registrazione;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -33,8 +34,22 @@ public class clientReader implements Runnable {
                     stop();
                 } else if (a[0].equalsIgnoreCase("read")) {
                     System.out.println(a[1]);
-                } else if (a[0].equalsIgnoreCase("read")) {
+                } else if (a[0].equalsIgnoreCase("write")) {
                     System.out.println(a[1]);
+                } else if (a[0].equalsIgnoreCase("register")) {
+                    if (a[1].equalsIgnoreCase("successo")) {
+                        registrazione = true;
+                    } else if (a[1].equalsIgnoreCase("errore")) {
+                        System.out.println("ERRORE: EMAIL, USERNAME o PASSWORD già presenti");
+                        registrazione = false;
+                    }
+                } else if (a[0].equalsIgnoreCase("login")) {
+                    if (a[1].equalsIgnoreCase("successo")) {
+                        registrazione = true;
+                    } else if (a[1].equalsIgnoreCase("errore")) {
+                        System.out.println("ERRORE: USERNAME o PASSWORD errata");
+                        registrazione = false;
+                    }
                 }
                 Thread.sleep(250);
             } while(!fermo);

@@ -11,7 +11,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ClientDiscosales {
-
+    public static boolean registrazione = false;
+    
     public static void main(String[] args) {
         Socket server;
         try {

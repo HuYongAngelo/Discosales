@@ -1,5 +1,6 @@
 package clientdiscosales;
 
+import static clientdiscosales.ClientDiscosales.registrazione;
 import static clientdiscosales.clientReader.risposta;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -18,6 +19,7 @@ public class clientWriter implements Runnable {
     private Scanner input;
     private boolean fermo = false;
     private Login l;
+    private Register r;
     private String message;
     
     public clientWriter(Socket s) {
@@ -25,6 +27,7 @@ public class clientWriter implements Runnable {
         input = new Scanner(System.in);
         
         l = new Login();
+        r = new Register();
         try {
             out = new PrintWriter(s.getOutputStream(), true);
         } catch (IOException ex) {
@@ -34,18 +37,21 @@ public class clientWriter implements Runnable {
 
     @Override
     public void run() {
-        out.print(l.controllo());
         do {
-            writeMessage();
-            
-            out.println(message);
-            if (message.endsWith("stop")) {
-                stop();
-            }
-            try {
-                Thread.sleep(250);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(clientWriter.class.getName()).log(Level.SEVERE, null, ex);
+            out.print(r.controllo());
+
+            while(registrazione) {
+                writeMessage();
+
+                out.println(message);
+                if (message.endsWith("stop")) {
+                    stop();
+                }
+                try {
+                    Thread.sleep(250);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(clientWriter.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         } while(!fermo);
     }
