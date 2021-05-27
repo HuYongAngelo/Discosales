@@ -16,10 +16,12 @@ public class ComunicationManager {
     private Chat chat;
     private PrintWriter out;
     private BufferedReader in;
+    private FileManager fm;
     
     public ComunicationManager(Socket s) {
         this.s = s;
         chat = new Chat(s);
+        fm = new FileManager();
         try {
             out = new PrintWriter(s.getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(s.getInputStream()));
@@ -30,15 +32,22 @@ public class ComunicationManager {
     
     public void Comunication(String richiesta) {
         String[] input = richiesta.split(";");
+        String output = "";
         
-        if (input[0].equalsIgnoreCase("read")) {
-            System.out.println(input[1]);
-        } else if (input[0].equalsIgnoreCase("login")) {
-            
+        if (input[0].equalsIgnoreCase("login")) {
+            if (fm.fileUsersLogin(input[2], input[3])) {
+                out.println("login;successo");
+            } else {
+                out.println("login;errore");
+            }
         } else if (input[0].equalsIgnoreCase("register")) {
-            
-        }
-        else if (input[0].equalsIgnoreCase("write")) {
+            if (fm.fileUsersRegister(input[1], input[2], input[3], s)) {
+                System.out.println("In teoria è dentro");
+                out.println("register;successo");
+            } else {
+                out.println("register;errore");
+            }
+        } else if (input[0].equalsIgnoreCase("write")) {
             out.println(chat.messaggi(input[1]));
         }
     }
