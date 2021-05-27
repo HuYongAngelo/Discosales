@@ -26,13 +26,13 @@ public class serverReader implements Runnable {
     
     @Override
     public void run() {
-        String[] a;
         try {
             do {
                 risposta = in.readLine();
                 if (risposta.endsWith("stop")) {
                     stop();
                 }
+                cm.Comunication(risposta);
                 Thread.sleep(250);
             } while(!fermo);
         } catch (IOException ex) {
