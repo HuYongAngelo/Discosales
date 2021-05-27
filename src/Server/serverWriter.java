@@ -29,6 +29,7 @@ public class serverWriter implements Runnable {
     public void run() {
         do {
             
+            // NEEDS FIXING
             
         /*  System.out.print("Write: ");
             msg = input.nextLine();
