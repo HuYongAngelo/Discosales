@@ -42,7 +42,6 @@ public class ComunicationManager {
             }
         } else if (input[0].equalsIgnoreCase("register")) {
             if (fm.fileUsersRegister(input[1], input[2], input[3], s)) {
-                System.out.println("In teoria è dentro");
                 out.println("register;successo");
             } else {
                 out.println("register;errore");

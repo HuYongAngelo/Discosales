@@ -15,6 +15,9 @@ public class serverWriter implements Runnable {
     private Scanner input;
     private boolean fermo = false;
     
+    private boolean registerCheck = false;
+    private boolean loginCheck = false;
+    
     public serverWriter(Socket s) {
         this.s = s;
         input = new Scanner(System.in);
@@ -28,8 +31,10 @@ public class serverWriter implements Runnable {
     @Override
     public void run() {
         do {
+            if (registerCheck) {
+                
+            }
             
-            // NEEDS FIXING
             
         /*  System.out.print("Write: ");
             msg = input.nextLine();
@@ -44,6 +49,14 @@ public class serverWriter implements Runnable {
                 Logger.getLogger(clientWriter.class.getName()).log(Level.SEVERE, null, ex);
             }
         } while(!fermo);
+    }
+    
+    public void setRegistrazione(boolean registerCheck) {
+        this.registerCheck = registerCheck;
+    }
+    
+    public void setLogin(boolean loginCheck) {
+        this.loginCheck = loginCheck;
     }
     
     public void stop() {

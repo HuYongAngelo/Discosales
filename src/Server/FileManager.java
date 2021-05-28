@@ -32,20 +32,21 @@ public class FileManager {
      // Se è false, esiste già la cartella con quella mail
         boolean controllo = true;
         try {
-            bw = new BufferedWriter(new FileWriter("C:\\discosales\\Users\\"+username+".txt", true));
-            
             if (!new File("C:\\discosales\\Users\\"+username+".txt").exists()) {
                 new File("C:\\discosales\\Users\\"+username+".txt").createNewFile();
+                bw = new BufferedWriter(new FileWriter("C:\\discosales\\Users\\"+username+".txt"));
+                bw.write(email+":"+username+":"+password);
+                bw.flush();
+                bw.close();
                 hm.put(s, username);
                 controllo = true;
             } else {
                 controllo = false; 
             }
-            
-            bw.write(email+":"+username+":"+password);
         } catch (IOException ex) {
             Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
         }
+        System.out.println(controllo);
         return controllo;
     }
     
@@ -75,7 +76,11 @@ public class FileManager {
         } else {
             controllo = false;
         }
-        
+        try {
+            br.close();
+        } catch (IOException ex) {
+            Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return controllo;
     }
 }

@@ -38,8 +38,12 @@ public class clientWriter implements Runnable {
     @Override
     public void run() {
         do {
-            out.print(r.controllo());
-
+            String s = r.controllo();
+            out.println(s);
+            out.flush();
+        } while(registrazione);
+        
+        do {
             while(registrazione) {
                 writeMessage();
 
@@ -47,13 +51,15 @@ public class clientWriter implements Runnable {
                 if (message.endsWith("stop")) {
                     stop();
                 }
-                try {
-                    Thread.sleep(250);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(clientWriter.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                
+            }
+            try {
+                Thread.sleep(250);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(clientWriter.class.getName()).log(Level.SEVERE, null, ex);
             }
         } while(!fermo);
+        out.close();
     }
     
     public void writeMessage() {

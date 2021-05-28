@@ -28,11 +28,9 @@ public class ServerManaging implements Runnable {
     @Override
     public void run() {
         Thread tsr = new Thread(sr);
-        Thread tsw = new Thread(sw);
         
         System.out.println("Serverino  partito: "+ clientSocket.getInetAddress());
 
         tsr.start();
-        tsw.start();
     }
 }
