@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 public class clientWriter implements Runnable {
     private Socket s;
     private PrintWriter out;
+    private Scanner sc;
     private Scanner input;
     private boolean fermo = false;
     private Login l;
@@ -24,6 +25,7 @@ public class clientWriter implements Runnable {
     
     public clientWriter(Socket s) {
         this.s = s;
+        sc = new Scanner(System.in);
         input = new Scanner(System.in);
         
         l = new Login();
@@ -37,11 +39,32 @@ public class clientWriter implements Runnable {
 
     @Override
     public void run() {
+        int opzione;
         do {
-            String s = r.controllo();
-            out.println(s);
-            out.flush();
-        } while(registrazione);
+            System.out.println("MENÚ\n");
+            System.out.println("1. Register");
+            System.out.println("2. Login");
+            System.out.println("3. Exit\n");
+            opzione = sc.nextInt();
+            
+            if (opzione == 1) {
+                String s = r.controllo();
+                out.println(s);
+                out.flush();
+                if (registrazione = true) {
+                    opzione = 3;
+                    System.out.println("Registrazione avvenuto con successo\n");
+                }
+            } else if (opzione == 2) {
+                String s = l.controllo();
+                out.println(s);
+                out.flush();
+                if (registrazione = true) {
+                    opzione = 3;
+                    System.out.println("Login avvenuto con successo\n");
+                }
+            }
+        } while(opzione != 3);
         
         do {
             while(registrazione) {
@@ -51,7 +74,7 @@ public class clientWriter implements Runnable {
                 if (message.endsWith("stop")) {
                     stop();
                 }
-                
+
             }
             try {
                 Thread.sleep(250);

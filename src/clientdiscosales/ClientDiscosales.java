@@ -16,9 +16,6 @@ public class ClientDiscosales {
     public static void main(String[] args) {
         Socket server;
         try {
-            String msg;
-            String[] r;
-            
             server = new Socket("127.0.0.1", 5500);
             clientReader cr = new clientReader(server);
             clientWriter cw = new clientWriter(server);

@@ -22,7 +22,6 @@ public class Register {
         password = sc.nextLine();
         
         credenziali = "register;"+email+";"+username+";"+password;
-        System.out.println(credenziali);
         
         return credenziali;
     }
