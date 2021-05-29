@@ -32,10 +32,9 @@ public class ComunicationManager {
     
     public void Comunication(String richiesta) {
         String[] input = richiesta.split(";");
-        String output = "";
         
         if (input[0].equalsIgnoreCase("login")) {
-            if (fm.fileUsersLogin(input[2], input[3])) {
+            if (fm.fileUsersLogin(input[1], input[2], s)) {
                 out.println("login;successo");
             } else {
                 out.println("login;errore");
@@ -47,7 +46,8 @@ public class ComunicationManager {
                 out.println("register;errore");
             }
         } else if (input[0].equalsIgnoreCase("write")) {
-            out.println(chat.messaggi(input[1]));
+            chat.messaggi(input[1]);
+            chat.reading(out);
         }
     }
 }
