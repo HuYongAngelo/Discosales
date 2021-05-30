@@ -1,5 +1,6 @@
 package clientdiscosales;
 
+import static clientdiscosales.ClientDiscosales.ferma;
 import static clientdiscosales.ClientDiscosales.registrazione;
 import static clientdiscosales.clientReader.risposta;
 import java.io.BufferedReader;
@@ -73,8 +74,9 @@ public class clientWriter implements Runnable {
                 out.println(message);
                 if (message.endsWith("stop")) {
                     stop();
+                    ferma=true;
+                    out.println("stop");
                 }
-
             }
             try {
                 Thread.sleep(250);

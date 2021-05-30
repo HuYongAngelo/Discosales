@@ -1,5 +1,6 @@
 package clientdiscosales;
 
+import static clientdiscosales.ClientDiscosales.ferma;
 import static clientdiscosales.ClientDiscosales.registrazione;
 import java.io.BufferedReader;
 import java.io.FileReader;

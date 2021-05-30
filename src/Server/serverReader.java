@@ -29,8 +29,9 @@ public class serverReader implements Runnable {
         try {
             do {
                 risposta = in.readLine();
-                if (risposta.endsWith("stop")) {
+                if (risposta.equalsIgnoreCase("stop")) {
                     stop();
+                    cm.writeStop();
                 }
                 cm.Comunication(risposta);
                 Thread.sleep(250);

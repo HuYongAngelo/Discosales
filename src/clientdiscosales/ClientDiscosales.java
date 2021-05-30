@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 
 public class ClientDiscosales {
     public static boolean registrazione = false;
+    public static boolean ferma = false;
     
     public static void main(String[] args) {
         Socket server;

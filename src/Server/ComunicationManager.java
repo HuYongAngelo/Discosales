@@ -50,4 +50,8 @@ public class ComunicationManager {
             chat.reading(out);
         }
     }
+    
+    public void writeStop() {
+        out.println("stop;");
+    }
 }
