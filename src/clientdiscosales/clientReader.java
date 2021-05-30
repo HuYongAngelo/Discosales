@@ -2,6 +2,7 @@ package clientdiscosales;
 
 import static clientdiscosales.ClientDiscosales.registrazione;
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
@@ -13,6 +14,7 @@ public class clientReader implements Runnable {
     private BufferedReader in;
     public static String risposta;
     private boolean fermo = false;
+    private BufferedReader br;
     
     public clientReader(Socket s) {
         this.s = s;
@@ -26,6 +28,7 @@ public class clientReader implements Runnable {
     @Override
     public void run() {
         String[] a;
+        String messages;
         try {
             do {
                 risposta = in.readLine();
@@ -33,7 +36,20 @@ public class clientReader implements Runnable {
                 if (a[0].equalsIgnoreCase("stop")) {
                     stop();
                 } else if (a[0].equalsIgnoreCase("read")) {
-                    System.out.println(a[1]);
+                    br = new BufferedReader(new FileReader("C:\\discosales\\chatLog.txt"));
+                    System.out.println("");
+                    System.out.println("");
+                    System.out.println("");
+                    System.out.println("");
+                    System.out.println("");
+                    System.out.println("");
+                    System.out.println("");
+                    do {
+                        messages = br.readLine();
+                        if (messages != null) {
+                            System.out.println(messages);
+                        }
+                    } while(messages != null);
                 } else if (a[0].equalsIgnoreCase("write")) {
                     System.out.println(a[1]);
                 } else if (a[0].equalsIgnoreCase("register")) {
