@@ -15,7 +15,6 @@ public class ComunicationManager {
     private Socket s;
     private Chat chat;
     private PrintWriter out;
-    private BufferedReader in;
     private FileManager fm;
     
     public ComunicationManager(Socket s) {
@@ -24,7 +23,6 @@ public class ComunicationManager {
         fm = new FileManager();
         try {
             out = new PrintWriter(s.getOutputStream(), true);
-            in = new BufferedReader(new InputStreamReader(s.getInputStream()));
         } catch (IOException ex) {
             Logger.getLogger(Chat.class.getName()).log(Level.SEVERE, null, ex);
         }
