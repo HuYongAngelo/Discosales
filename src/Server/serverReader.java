@@ -34,7 +34,7 @@ public class serverReader implements Runnable {
                     cm.writeStop();
                 }
                 cm.Comunication(risposta);
-                Thread.sleep(250);
+                Thread.sleep(50);
             } while(!fermo);
         } catch (IOException ex) {
             Logger.getLogger(clientReader.class.getName()).log(Level.SEVERE, null, ex);

@@ -41,6 +41,20 @@ public class Chat {
     }
     
     public void reading(PrintWriter out) {
-        out.println("read;"+messages);
+        String messages = "";
+        try {
+            br = new BufferedReader(new FileReader("C:\\discosales\\chatLog.txt"));
+            
+            do {
+                messages = br.readLine();
+                if (messages != null) {
+                    out.println("read;"+messages);
+                }
+            } while(messages != null);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

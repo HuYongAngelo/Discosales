@@ -65,6 +65,7 @@ public class clientWriter implements Runnable {
                     System.out.println("Login avvenuto con successo\n");
                 }
             }
+            System.out.println("");
         } while(opzione != 3);
         
         do {

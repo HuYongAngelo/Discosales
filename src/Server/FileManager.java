@@ -81,8 +81,10 @@ public class FileManager {
                 if (dati[2].equals(password)) {
                     controllo = true;
                     hm.put(s, dati[1]);
+                    br.close();
                 } else {
                     controllo = false;
+                    br.close();
                 }
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
@@ -91,11 +93,6 @@ public class FileManager {
             }
         } else {
             controllo = false;
-        }
-        try {
-            br.close();
-        } catch (IOException ex) {
-            Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
         }
         return controllo;
     }
